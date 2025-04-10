@@ -4,8 +4,6 @@ const authorizeAdmin = require("../middleware/authorizeAdmin");
 const Blog = require("../models/Blog");
 
 const router = express.Router();
-
-// Add a new blog
 router.post("/", authenticate, authorizeAdmin, async (req, res) => {
   try {
     const { title, content } = req.body;
@@ -19,8 +17,6 @@ router.post("/", authenticate, authorizeAdmin, async (req, res) => {
     res.status(500).json({ error: "Failed to add blog" });
   }
 });
-
-// Get all blogs
 router.get("/", async (req, res) => {
   try {
     const blogs = await Blog.find();
