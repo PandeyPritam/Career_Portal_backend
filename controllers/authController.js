@@ -4,11 +4,13 @@ const jwt = require("jsonwebtoken");
 
 module.exports.register = async (req, res) => {
   try {
-    const { firstName, lastName, email, password ,role} = req.body;
-    const isAdmin = role === "admin";
-    const user = new User({ firstName, lastName, email, password });
+    const { firstName, lastName, email, password, role } = req.body;
+
+    const isAdmin = role === "admin"; // Set isAdmin based on the role
+    const user = new User({ firstName, lastName, email, password, isAdmin });
+
     await user.save();
-     res.status(201).json({ message: "User registered successfully" });
+    res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     console.error("Signup Error:", error.message);
     res.status(400).json({ error: error.message });
