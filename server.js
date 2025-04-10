@@ -8,9 +8,7 @@ if (!process.env.MONGO_URI || !process.env.JWT_SECRET) {
   console.error("Missing required environment variables. Check your .env file.");
   process.exit(1);
 }
-
 connectDB();
-
 const app = express();
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
