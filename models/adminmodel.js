@@ -24,6 +24,11 @@ const adminSchema = new mongoose.Schema({
       minlength: 8,
       match: /^(?=.*[!@#$%^&*])/, 
     },
+    role: {
+      type: String,
+      enum: ["admin", "user"],
+      default: "user",
+    },
   });
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
